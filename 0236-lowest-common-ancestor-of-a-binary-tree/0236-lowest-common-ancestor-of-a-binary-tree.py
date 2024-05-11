@@ -6,54 +6,19 @@
 #         self.right = None
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, node: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         
-        find_p = False
-        find_q = False
-        d = {}
-        d[root.val] = []
-        
-        tmp = [root]
-        
-        while (len(tmp) != 0) :
-            tmp2 = []
+        # base case, we've found either p or q (so return one of them), or it's None (so return None)
+        if not node or p == node or q == node:
+            return node
 
-            for node in tmp :
-                #print(node.val)
-                if node.val == p.val :
-                    find_p = True
-                elif node.val == q.val :
-                    find_q = True
-                
-                if node.left is not None :
-                    d[node.left.val] = d[node.val] + [0]
-                    tmp2.append(node.left)
-                    
-                if node.right is not None :
-                    d[node.right.val] = d[node.val] + [1]
-                    tmp2.append(node.right)
-                    
-            tmp = tmp2
-            if find_p and find_q :
-                break
-                
-        #print('-----------------')
-        #print(d)
-        
-        curr = root
-        for i in range(min(len(d[p.val]), len(d[q.val]))) :
-    
-            if d[p.val][i] == d[q.val][i] :
-                if d[p.val][i] == 0 :
-                    curr = curr.left
-                else :
-                    curr = curr.right
-            else :
-                return curr
-            
-        return curr 
-            
-            
-            
-            
-            
+		# recursively check both sides of the children of this current node
+        left  = self.lowestCommonAncestor(node.left, p, q)
+        right = self.lowestCommonAncestor(node.right, p, q)
+
+		# if we found BOTH p and q, we're done! return this node, it's the LCA
+        if left and right:
+            return node
+
+		# otherwise, return "left" or "right". This will either return: None, P, or Q
+        return left or right
