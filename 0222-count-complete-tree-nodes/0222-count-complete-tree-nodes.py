@@ -10,26 +10,35 @@ class Solution:
         if root is None :
             return 0
         
-        count = 0
-        current = root
- 
-        while current:
-            if current.left is None:
-                count += 1
-                current = current.right
-            else:
-                prev = current.left
-                while prev.right and prev.right != current:
-                    prev = prev.right
-
-                if prev.right is None:
-                    prev.right = current
-                    current = current.left
-                else:
-                    prev.right = None
-                    count += 1
-                    current = current.right
-
-        return count
         
+        lh = self.get_lh(root)
+        rh = self.get_rh(root)
+        
+        if lh == rh :
+            return (2**rh - 1)
+        
+        else :
+            
+            return (1 + self.countNodes(root.left) + self.countNodes(root.right))
+            
+        
+        
+        
+    def get_lh(self, root) :
+        if root is None :
+            return 0
+        h = 0
+        while root is not None :
+            root = root.left
+            h += 1
+        return h
+    
+    def get_rh(self, root) :
+        if root is None :
+            return 0
+        h = 0
+        while root is not None :
+            root = root.right
+            h += 1
+        return h
         
