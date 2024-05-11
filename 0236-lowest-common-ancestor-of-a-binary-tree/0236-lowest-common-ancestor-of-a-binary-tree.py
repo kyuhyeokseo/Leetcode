@@ -19,7 +19,7 @@ class Solution:
             tmp2 = []
 
             for node in tmp :
-                print(node.val)
+                #print(node.val)
                 if node.val == p.val :
                     find_p = True
                 elif node.val == q.val :
