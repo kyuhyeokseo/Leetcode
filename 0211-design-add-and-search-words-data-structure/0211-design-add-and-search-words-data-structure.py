@@ -1,37 +1,47 @@
-
+class Node:
+    def __init__(self):
+        self.children = {}
+        self.end = False
 
 class WordDictionary:
 
     def __init__(self):
-
-        self.children = [None]*26
-        self.isEndOfWord = False
+        self.root = Node()
         
 
     def addWord(self, word: str) -> None:
-        curr = self
+        curr = self.root
         for c in word:
-            if curr.children[ord(c) - ord('a')] == None:
-                curr.children[ord(c) - ord('a')] = WordDictionary()
-            curr = curr.children[ord(c) - ord('a')]
-        
-        curr.isEndOfWord = True;
+            if c not in curr.children:
+                curr.children[c] = Node()
+            curr = curr.children[c]
+        curr.end=True
         
 
     def search(self, word: str) -> bool:
+        return self.dfs(self.root, word, 0)
         
-        curr = self
-        for i in range(len(word)):
-            c = word[i]
-            if c == '.':
-                for ch in curr.children:
-                    if ch != None and ch.search(word[i+1:]): return True
-                return False
-            
-            if curr.children[ord(c) - ord('a')] == None: return False
-            curr = curr.children[ord(c) - ord('a')]
         
-        return curr != None and curr.isEndOfWord
+        
+    def dfs(self, curr, word, idx) :
+        
+        if idx == len(word) :
+            return curr.end
+        
+        if word[idx] == '.' :
+            for children_node in curr.children.values():
+                if self.dfs(children_node, word, idx+1) :
+                    return True
+            return False
+        
+        if word[idx] not in curr.children :
+            return False
+        
+    
+        return self.dfs(curr.children[word[idx]], word, idx+1)
+        
+        
+        
         
 
 
