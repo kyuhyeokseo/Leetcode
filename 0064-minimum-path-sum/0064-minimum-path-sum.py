@@ -18,9 +18,9 @@ class Solution:
         
     def propagation(self, x, y):
         
-        direc = [(1,0), (0,1), (-1,0), (0,-1)]
+        direc = [(1,0), (0,1)]
         
-        for idx in range(4) :
+        for idx in range(2) :
             dX, dY = direc[idx]
             
             if (x+dX >= 0) and (x+dX < self.M) and (y+dY >=0) and (y+dY < self.N) :
