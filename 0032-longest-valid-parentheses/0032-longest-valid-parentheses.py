@@ -41,7 +41,6 @@ class Solution:
                 else :
                     tmp_list = rec[x+1:y]
                     
-                    #print(tmp_list)
                     L = len(tmp_list)
                     if L == 0 :
                         x = y
@@ -49,12 +48,10 @@ class Solution:
                     m = 0
                     z = 0
                     while True :
-                        #print(m)
                         if m + tmp_list[z] > L:
                             break
                         m += tmp_list[z]
                         z += tmp_list[z]
-                        #print(m)
                         if z >= L :
                             break
                     
@@ -77,7 +74,6 @@ class Solution:
                     break
                     
             out = max(m, out)
-            #print(out)
   
 
         return out
