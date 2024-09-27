@@ -8,49 +8,49 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        
-        def getLength(head):
-            cnt = 0
-            while head :
-                head = head.next
-                cnt += 1
-            return cnt
-        
-        L = getLength(head)
-        
-        if L == 0 :
-            return head
-        elif L == 1 :
+        if head is None :
             return head
         
-        N = (L-1)//2
+        stack, queue = [], []
         
-        tmp1 = head
-        tmp2 = tmp1.next
+        slow = fast = head
         
-        for _ in range(N):
+        while fast.next and fast.next.next :
+            slow = slow.next
+            fast = fast.next.next
             
-            prev = tmp1
-            curr = tmp1.next
-            while curr.next :
-                prev = prev.next
-                curr = curr.next
-            #print(tmp1.val, tmp2.val, prev.val, curr.val)
-            curr.next = tmp2
-            tmp1.next = curr
-            prev.next = None
-            
-            tmp1 = tmp2
-            tmp2 = tmp1.next
-            
-            
-            #p = head
-            #print('-------------')
-            #while p :
-            #    print(p.val)
-            #    p = p.next
-            #print('-------------')
+        s_srt = slow.next
+        q_srt = head
         
+        while q_srt != s_srt :
+            queue.append(q_srt)
+            q_srt = q_srt.next
+        
+        while s_srt :
+            stack.append(s_srt)
+            s_srt = s_srt.next
+        
+        #print(queue)
+        #print(stack)
+        
+        out = ListNode()    
+        s = out
+        
+        while stack :
+            q = queue.pop(0)
+            s.next = q
+            s = stack.pop()
+            q.next = s
+        
+        if queue :
+            q = queue.pop(0)
+            s.next = q
+            q.next = None
+            return out.next
+            
+        else :
+            s.next = None
+            return out.next
         
         
         
