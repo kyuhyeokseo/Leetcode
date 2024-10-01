@@ -25,7 +25,7 @@ class Solution:
         for i in range(N) :
             if D[i] :
                 D[i].sort()
-                bucket_sort += (D[i][:])
+                bucket_sort += [min(D[i]), max(D[i])]
         
         #print(bucket_sort)
         diff = 0
