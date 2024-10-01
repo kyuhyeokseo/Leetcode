@@ -11,7 +11,6 @@ class Solution:
         D = defaultdict(list)
         minN, maxN = min(nums), max(nums)
         
-        
         for num in nums :
             
             if num != maxN :
