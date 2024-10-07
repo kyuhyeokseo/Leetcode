@@ -16,7 +16,7 @@ class Solution:
             tmp *= 4
             tmp += D[s[i]]
             tmp %= (1<<20)
-            print(i, tmp, out[i])
+            #print(i, tmp, out[i])
             
             if i >= 9 :
                 if out[tmp] == 0 :
