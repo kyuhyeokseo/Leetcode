@@ -9,7 +9,11 @@ class Solution:
         if s == s[::-1] :
             return s
         
+        S = s[:-1]
+        T = s[-1]
         for i in range(L-1, 0, -1):
-            if s[:i] == s[:i][::-1] :
-                out = s[i:][::-1] + s
+            if S == S[::-1] :
+                out = T[::-1] + s
                 return out
+            S = S[:-1]
+            T = s[i-1]+T
