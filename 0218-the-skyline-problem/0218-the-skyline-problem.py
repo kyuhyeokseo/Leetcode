@@ -4,16 +4,12 @@ class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         
         ans = []
-        X_in_list, X_out_list = [], []
-        Y_list = []
         X = 0
         D_in, D_out = defaultdict(list), defaultdict(list)
         x_list = []
         
         for item in buildings :
             srt, end, h = item[0], item[1], item[2]
-            X_in_list.append(srt)
-            X_out_list.append(end)
             
             D_in[srt].append(h)
             D_out[end].append(h)
@@ -27,9 +23,7 @@ class Solution:
         
         x_list = list(set(x_list))
         x_list.sort()
-        #print(x_list)
-        #print('----------')
-        
+
         for i in x_list:
             
             if i in D_in :
@@ -46,8 +40,6 @@ class Solution:
             if H_new != H :
                 H = H_new
                 ans.append([i, H_new])
-            
-            #print(q)
         
         return ans
         
