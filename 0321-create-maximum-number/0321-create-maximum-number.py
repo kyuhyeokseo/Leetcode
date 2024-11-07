@@ -15,7 +15,7 @@ class Solution:
                 X = self.getMax(nums1, x)
                 Y = self.getMax(nums2, y)
                 new = self.mergeXY(X, Y)
-                print(x,y,X, Y, new)
+                #print(x,y,X, Y, new)
                 ret = max(ret, new)
                 
         return ret
