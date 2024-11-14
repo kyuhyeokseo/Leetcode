@@ -12,7 +12,7 @@ class Solution:
         for ticket in self.tickets :
             self.Path_to[ticket[0]].append(ticket[1])
             
-        print(self.Path_to)
+        #print(self.Path_to)
         
         self.visit('JFK')
         return self.ret[::-1]
