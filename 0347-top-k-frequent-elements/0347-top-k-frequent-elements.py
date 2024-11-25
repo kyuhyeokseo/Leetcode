@@ -14,13 +14,13 @@ class Solution:
                 d[n] = 1
         
         for x in d.keys():
-            print([-d[x], x])
+            #print([-d[x], x])
             heapq.heappush(q, (-d[x], x))
         
-        print('----------')
+        #print('----------')
         for _ in range(k):
             y = heapq.heappop(q)
-            print(y, y[1])
+            #print(y, y[1])
             ans.append(y[1])
         
         return ans
