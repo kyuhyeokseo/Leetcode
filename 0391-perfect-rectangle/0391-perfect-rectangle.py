@@ -54,13 +54,6 @@ class Solution:
                 else :
                     D_detail[key_detail] = True
 
-            #print(R)
-            #print(D)
-            #print()
-            #print(D_detail)
-            #print()
-            #print()
-        
         if len(D.keys()) != 4 :
             return False
         
