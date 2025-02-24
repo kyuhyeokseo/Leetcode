@@ -2,6 +2,7 @@ class Solution:
     def makesquare(self, matchsticks: List[int]) -> bool:
         
         self.matchsticks = matchsticks
+        self.matchsticks.sort(reverse=True)
         self.set = set()
 
         L = 0
