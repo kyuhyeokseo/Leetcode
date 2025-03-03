@@ -57,10 +57,7 @@ class Solution:
                 rec[-MAX_q[0]] -= 1
                 heapq.heappop(MAX_q)
             
-            #print('LINE 60 ', MAX_q, MIN_q)
             M = getMedian(MAX_q, MIN_q)
             ret.append(M)
-
-            #print(MAX_q, MIN_q, M)
         
         return ret
