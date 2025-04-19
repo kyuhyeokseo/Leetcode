@@ -12,12 +12,12 @@ class Solution:
 
         tmps = []
         for i in range(L):
-            tmps.append(list(map(int, timePoints[i].split(':'))))
+            v = list(map(int, timePoints[i].split(':')))
+            H, M = v[0], v[1]
+            tmps.append(60 * H + M)
 
         for i in range(L-1):
-            prv, nxt = tmps[i], tmps[i+1]
-            H1, M1, H2, M2 = prv[0], prv[1], nxt[0], nxt[1]
             
-            ret = min(ret, (H2-H1) * 60 + (M2-M1))
+            ret = min(ret, tmps[i+1] - tmps[i])
         
         return ret
