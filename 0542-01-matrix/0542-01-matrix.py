@@ -29,7 +29,6 @@ class Solution:
                     borders.append(str(i) + '_' + str(j))
         
         while borders:
-            #print(borders)
             s = set()
             for b in borders:
                 tmp = b.split('_')
