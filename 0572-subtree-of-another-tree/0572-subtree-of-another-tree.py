@@ -19,4 +19,4 @@ class Solution:
         if root and subRoot:
             return root.val == subRoot.val and self.identical(root.left, subRoot.left) and self.identical(root.right, subRoot.right)
         
-        return root is subRoot
+        return (root is None and subRoot is None)
