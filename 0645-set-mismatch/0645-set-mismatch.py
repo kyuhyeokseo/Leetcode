@@ -1,24 +1,11 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
         
-        together, dup = 0, None
+        S, X, Y = 0, 0, 0
 
-        for i in range(len(nums)):
-
-            together ^= (i+1)
-            if nums[i]>0:
-                together ^= nums[i]
-                if nums[nums[i]-1] < 0:
-                    dup = nums[i]
-                nums[nums[i]-1] *= -1
-            else:
-                together ^= (-nums[i])
-                if nums[(-nums[i])-1] < 0:
-                    dup = -nums[i]
-                nums[(-nums[i])-1] *= -1
-            
-            #print(nums, together, dup)
+        S = sum(nums)
+        X = (len(nums) * (len(nums)+1)) // 2
+        Y = sum(set(nums))
         
-        return [dup, dup^together]
-        
+        return [S-Y, X-Y]
         
