@@ -13,6 +13,8 @@ class Solution:
 
         def union(x, y):
             rootX, rootY = find(x), find(y)
+            #print(x, ':', rootX)
+            #print(y, ':', rootY)
             if rootX == rootY:
                 return False
             parents[rootY] = rootX
@@ -25,9 +27,9 @@ class Solution:
                 e2 = [p, c]
             else:
                 parents[c] = p
-        
-        parents = [i for i in range(N+1)]
 
+        parents = [i for i in range(N+1)]
+        
         for p, c in edges:
             if [p, c] == e2:
                 continue
