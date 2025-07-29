@@ -2,39 +2,32 @@ class Solution:
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         
         N, K = len(nums), k
-        dp = [[(-1,-1), (-1,-1,-1), (-1,-1,-1,-1)] for _ in range(N)]
 
-        dp[K-1][0]   = (sum(nums[:K]), 0)
-        dp[2*K-1][1] = (sum(nums[:2*K]), 0, K)
-        dp[3*K-1][2] = (sum(nums[:3*K]), 0, K, 2*K)
+        left, right = [[-1, -1] for _ in range(N)], [[-1, -1] for _ in range(N)]
 
-        for k in range(K, N):
-            M = max(dp[k-1][0][0], sum(nums[k-K+1:k+1]))
-            if M == dp[k-1][0][0]:
-                dp[k][0] = (M, dp[k-1][0][1])
+        for n in range(k, N-2*K+1):
+            M = max(left[n-1][0], sum(nums[n-K:n]))
+            if M == left[n-1][0]:
+                left[n] = [M, left[n-1][1]]
             else:
-                dp[k][0] = (M, k-K+1)
+                left[n] = [M, n-K]
             
-        
-        for k in range(2*K, N):
-            M = max(dp[k-1][1][0], dp[k-K][0][0] + sum(nums[k-K+1:k+1]))
-            if M == dp[k-1][1][0]:
-                dp[k][1] = (M,) + dp[k-1][1][1:]
+            x = N-1-n
+            M = max(right[x+1][0], sum(nums[x+1:x+K+1]))
+            if M == sum(nums[x+1:x+K+1]):
+                right[x] = [M, x+1]
             else:
-                dp[k][1] = (M, dp[k-K][0][1], k-K+1)
+                right[x] = [M, right[x+1][1]]
+            
+        #print(left)
+        #print(right)
 
-        for k in range(3*K, N):
-            M = max(dp[k-1][2][0], dp[k-K][1][0] + sum(nums[k-K+1:k+1]))
-            if M == dp[k-1][2][0]:
-                dp[k][2] = (M,) + dp[k-1][2][1:]
-            else:
-                dp[k][2] = (M,) + dp[k-K][1][1:] + (k-K+1,)
-
-
-
-        #for k in range(N):
-        #    print(dp[k][0], dp[k][1], dp[k][2])
+        M = -1
+        ret = None
+        for b in range(K, N-2*K+1):
+            if M < left[b][0] + sum(nums[b:b+K]) + right[b+K-1][0]:
+                M = left[b][0] + sum(nums[b:b+K]) + right[b+K-1][0]
+                ret = [left[b][1], b, right[b+K-1][1]]
         
-
-        return list(dp[-1][2][1:])
+        return ret
         
