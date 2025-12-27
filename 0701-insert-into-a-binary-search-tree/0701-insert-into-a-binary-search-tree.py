@@ -18,5 +18,8 @@ class Solution:
                     root.left = TreeNode(val, None, None)
                 else:
                     root.left = self.insertIntoBST(root.left, val)
-
-        return root
+            
+            return root
+        
+        else:
+            return TreeNode(val)
