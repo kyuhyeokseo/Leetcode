@@ -7,19 +7,10 @@ class Solution:
 
         for i in range(N):
             Ti = temperatures[i]
-            while stk:
+            while stk and stk[-1][1] < Ti:
                 j, Tj = stk.pop()
-                if Tj >= Ti:
-                    stk.append((j, Tj))
-                    stk.append((i, Ti))
-                    break
-                else:
-                    ret[j] = i-j
+                ret[j] = i-j         
             stk.append((i, Ti))
-        
-        while stk:
-            j, Tj = stk.pop()
-            ret[j] = 0
         
         return ret
             
